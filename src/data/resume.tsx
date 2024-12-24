@@ -176,7 +176,7 @@ export const DATA = {
     },
     {
       title: "Monster Slayer Game",
-      href: "https://varuntv.me/monster-slayer-game-vue/",
+      href: "https://varuntv97.github.io/monster-slayer-game-vue/",
       dates: "Feb 2021",
       active: true,
       description:
@@ -190,7 +190,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://varuntv.me/monster-slayer-game-vue/",
+          href: "https://varuntv97.github.io/monster-slayer-game-vue/",
           icon: <Icons.globe className="size-3" />,
         },
         {
