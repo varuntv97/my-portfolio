@@ -95,7 +95,7 @@ export const DATA = {
       title: "Frontend Developer",
       logoUrl: "/exinousLogo.png",
       start: "Feb 2022",
-      // end: "Present",
+      end: "Present",
       description:
         "Contributed to the development of multiple web applications, working across both frontend and backend, utilizing modern frameworks and technologies to deliver robust and scalable solutions. Currently, focusing on learning DevOps practices and implementing small tasks to gain hands-on experience with CI/CD pipelines, containerization, and cloud deployment.",
     },
