@@ -1,15 +1,13 @@
-import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { ProcessCard } from "@/components/process-card";
-// import { ConfettiSideCannons } from "@/components/confetti-cannons";
+import Avatar from "@/components/avatar-card";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -34,10 +32,11 @@ export default function Page() {
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
-              <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              <Avatar
+                alt={DATA.name}
+                src={DATA.avatarUrl}
+                initials={DATA.initials}
+              />
             </BlurFade>
           </div>
         </div>
