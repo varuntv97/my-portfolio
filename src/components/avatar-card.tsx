@@ -23,7 +23,7 @@ export default function AvatarWithConfetti({
     };
 
     return (
-        <div className="relative">
+        <div className="relative cursor-pointer">
             <Avatar className="size-28 border" onClick={handleClick}>
                 <AvatarImage alt={alt} src={src} />
                 <AvatarFallback>{initials}</AvatarFallback>
