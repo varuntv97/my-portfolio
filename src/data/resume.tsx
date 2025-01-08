@@ -145,7 +145,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/calmGrowth.png",
+      image: "/cg.png",
       video:
         "",
     },
@@ -171,8 +171,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "https://raw.githubusercontent.com/varuntv97/threejs-sphere/01916fb7cd34c4eb09e9cfc8950126d74c6a4f6e/3js-sphere.mp4",
+      image: "/three.png",
+      video: "",
     },
     {
       title: "Monster Slayer Game",
@@ -199,12 +199,12 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "https://raw.githubusercontent.com/varuntv97/monster-slayer-game-vue/main/monster-slayer.mp4",
+      image: "/monsterSlayer.png",
+      video: "",
     },
     {
       title: "Customer Sales Insights",
-      href: "https://automatic.chat",
+      href: "https://github.com/varuntv97/customer-sales-insights-api",
       dates: "Sep 2024",
       active: true,
       description:
