@@ -28,9 +28,18 @@ export const DATA = {
     "Vue.js",
     "React",
     "Next.js",
-    "Node.js",
+    "Tailwind CSS",
     "Python",
     "Go",
+    "Express.js",
+    "Flask",
+    "REST",
+    "PostgreSQL",
+    "MongoDB",
+    "GraphQL",
+    "Supabase",
+    "AWS",
+    "Azure",
     "Docker",
     "Kubernetes",
   ],
@@ -56,20 +65,20 @@ export const DATA = {
 
         navbar: true,
       },
-      X: {
-        name: "X",
-        url: "https://x.com/varuntv97?s=21&t=wL0vNpPDfHMzUtrD6sbpBQ",
-        icon: Icons.x,
+      // X: {
+      //   name: "X",
+      //   url: "https://x.com/varuntv97?s=21&t=wL0vNpPDfHMzUtrD6sbpBQ",
+      //   icon: Icons.x,
 
-        navbar: true,
-      },
-      Instagram: {
-        name: "Instagram",
-        url: "https://www.instagram.com/varun_venkatesh/",
-        icon: Icons.instagram,
+      //   navbar: true,
+      // },
+      // Instagram: {
+      //   name: "Instagram",
+      //   url: "https://www.instagram.com/varun_venkatesh/",
+      //   icon: Icons.instagram,
 
-        navbar: true,
-      },
+      //   navbar: true,
+      // },
       // Youtube: {
       //   name: "Youtube",
       //   url: "https://dub.sh/dillion-youtube",
@@ -124,6 +133,78 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Sanchara",
+      href: "https://sanchara.vercel.app/",
+      dates: "March 2025",
+      active: true,
+      description:
+        "Developed this application to simplify travel planning through AI-powered tools that generate smart, personalized itineraries.",
+      technologies: [
+        "Next.js",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL",
+        "Gemini",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://sanchara.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/sanchara.png",
+      video:
+        "",
+    },
+    {
+      title: "Ramtech",
+      href: "https://www.ramte.ch/",
+      dates: "March 2025",
+      active: true,
+      description:
+        "Developed a custom website for an engineering company, focusing on user experience and responsive design with admin panel for easy content management.",
+      technologies: [
+        "Next.js",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.ramte.ch/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/ramtech.png",
+      video:
+        "",
+    },
+    {
+      title: "Sharana Krupa Valuers",
+      href: "https://www.sharanakrupavaluers.com/",
+      dates: "Feb 2025",
+      active: true,
+      description:
+        "Developed a custom website for a valuation firm, focusing on user experience and responsive design.",
+      technologies: [
+        "CSS",
+        "HTML",
+        "JavaScript",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.sharanakrupavaluers.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/sharanakrupavaluers.png",
+      video:
+        "",
+    },
+    {
       title: "Calm Growth",
       href: "https://calmgrowth.ca",
       dates: "Nov 2024",
@@ -146,6 +227,59 @@ export const DATA = {
         },
       ],
       image: "/cg.png",
+      video:
+        "",
+    },
+    // {
+    //   title: "Monster Slayer Game",
+    //   href: "https://varuntv97.github.io/monster-slayer-game-vue/",
+    //   dates: "Feb 2021",
+    //   active: true,
+    //   description:
+    //     "Monster Slayer is a Vue.js game where you fight a monster using attacks, healing, and special moves. The game ends with a win, loss, or draw based on health.",
+    //   technologies: [
+    //     "Vue.js",
+    //     "HTML",
+    //     "CSS",
+    //     "JavaScript",
+    //   ],
+    //   links: [
+    //     {
+    //       type: "Website",
+    //       href: "https://varuntv97.github.io/monster-slayer-game-vue/",
+    //       icon: <Icons.globe className="size-3" />,
+    //     },
+    //     {
+    //       type: "Source",
+    //       href: "https://github.com/varuntv97/monster-slayer-game-vue",
+    //       icon: <Icons.github className="size-3" />,
+    //     },
+    //   ],
+    //   image: "/monsterSlayer.png",
+    //   video: "",
+    // },
+    {
+      title: "Customer Sales Insights",
+      href: "https://github.com/varuntv97/customer-sales-insights-api",
+      dates: "Sep 2024",
+      active: true,
+      description:
+        "A Flask based API that handles customer and sales data, providing valuable insights through aggregation and reporting.",
+      technologies: [
+        "Flask",
+        "Python",
+        "MongoDB",
+        "Docker",
+        "Kubernetes",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/varuntv97/customer-sales-insights-api",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/sales.png",
       video:
         "",
     },
@@ -173,59 +307,6 @@ export const DATA = {
       ],
       image: "/three.png",
       video: "",
-    },
-    {
-      title: "Monster Slayer Game",
-      href: "https://varuntv97.github.io/monster-slayer-game-vue/",
-      dates: "Feb 2021",
-      active: true,
-      description:
-        "Monster Slayer is a Vue.js game where you fight a monster using attacks, healing, and special moves. The game ends with a win, loss, or draw based on health.",
-      technologies: [
-        "Vue.js",
-        "HTML",
-        "CSS",
-        "JavaScript",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://varuntv97.github.io/monster-slayer-game-vue/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/varuntv97/monster-slayer-game-vue",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/monsterSlayer.png",
-      video: "",
-    },
-    {
-      title: "Customer Sales Insights",
-      href: "https://github.com/varuntv97/customer-sales-insights-api",
-      dates: "Sep 2024",
-      active: true,
-      description:
-        "A Flask based API that handles customer and sales data, providing valuable insights through aggregation and reporting.",
-      technologies: [
-        "Flask",
-        "Python",
-        "MongoDB",
-        "Docker",
-        "Kubernetes",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/varuntv97/customer-sales-insights-api",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/sales.png",
-      video:
-        "",
     },
   ],
   process: [

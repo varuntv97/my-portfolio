@@ -46,6 +46,67 @@ export const metadata: Metadata = {
     google: "",
     yandex: "",
   },
+  icons: {
+    icon: "/favicon/favicon.ico",
+    shortcut: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
+  manifest: "/favicon/manifest.json",
+  alternates: {
+    canonical: DATA.url,
+    languages: {
+      "en-US": DATA.url,
+      "es-ES": DATA.url,
+    },
+  },
+  appleWebApp: {
+    capable: true,
+    title: DATA.name,
+    statusBarStyle: "default",
+    startupImage: [
+      "/favicon/apple-touch-icon.png",
+      "/favicon/apple-touch-icon-120x120.png",
+      "/favicon/apple-touch-icon-152x152.png",
+      "/favicon/apple-touch-icon-167x167.png",
+      "/favicon/apple-touch-icon-180x180.png",
+    ],
+  },
+  telephone: false,
+  address: false,
+  email: false,
+  date: false,
+  time: false,
+  flightNumber: false,
+  addressCity: false,
+  addressState: false,
+  addressCountry: false,
+  addressPostalCode: false,
+  addressStreet: false,
+  addressStreet2: false,
+  addressStreet3: false,
+  addressStreetName: false,
+  addressStreetNumber: false,
+  addressStreetSuffix: false,
+  addressStreetPrefix: false,
+  addressStreetType: false,
+  addressStreetDirection: false,
+  addressStreetUnit: false,
+  addressStreetUnitType: false,
+  addressStreetUnitNumber: false,
+  addressStreetUnitSuffix: false,
+  addressStreetUnitName: false,
+  addressStreetUnitName2: false,
+  addressStreetUnitName3: false,
+  addressStreetUnitName4: false,
+  addressStreetUnitName5: false,
+  addressStreetUnitName6: false,
+  addressStreetUnitName7: false,
+  addressStreetUnitName8: false,
+  addressStreetUnitName9: false,
+  addressStreetUnitName10: false,
+  addressStreetUnitName11: false,
+  addressStreetUnitName12: false,
+  addressStreetUnitName13: false,
 };
 
 export default function RootLayout({
@@ -55,12 +116,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
