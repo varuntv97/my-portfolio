@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { CodeXml, HomeIcon, NotebookPen } from "lucide-react";
 
 const numberOfYears = (): number => {
   const currentDate = new Date();
@@ -45,7 +45,8 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    // { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/blog", icon: NotebookPen, label: "Blog" },
+    { href: "/projects", icon: CodeXml, label: "Projects" },
   ],
   contact: {
     email: "varun_tv@outlook.com",

@@ -8,6 +8,7 @@ import Link from "next/link";
 import Markdown from "react-markdown";
 import { ProcessCard } from "@/components/process-card";
 import Avatar from "@/components/avatar-card";
+import { ChevronRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -150,8 +151,13 @@ export default function Page() {
                   links={project.links}
                 />
               </BlurFade>
-            ))}
+            )).slice(0, 4)}
           </div>
+          <BlurFade delay={BLUR_FADE_DELAY * 12 + 4 * 0.05}>
+            <Link href="/projects" className="hover:underline text-center block mt-4 text-sm font-medium">View All Projects
+            <ChevronRight className="w-4 h-4 inline-block" />
+            </Link>
+          </BlurFade>
         </div>
       </section>
       <section id="process">
