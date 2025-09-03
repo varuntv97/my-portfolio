@@ -17,10 +17,10 @@ export const DATA = {
   location: "Mysuru, Karnataka, IN",
   locationLink: "https://www.google.co.in/maps/place/Mysuru,+Karnataka/@12.3106334,76.5532878,12z/data=!3m1!4b1!4m6!3m5!1s0x3baf70381d572ef9:0x2b89ece8c0f8396d!8m2!3d12.2958104!4d76.6393805!16zL20vMGo2MDM?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
   description:
-    `Frontend Developer with ${numberOfYears()} years of experience, passionate about modern technologies and user experiences.`,
+    `Senior Software Developer with ${numberOfYears()} years of experience, passionate about modern technologies and user experiences.`,
   // summary:
   //   "At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).",
-  summary: `In my ${numberOfYears()}-year journey as a frontend developer, I've honed my skills in building intuitive and scalable web applications. I'm passionate about exploring cutting-edge technologies and creating impactful digital solutions. Along the way, I've delivered projects for startups and freelance clients and continuously worked on refining my craft to push the boundaries of what's possible in software development.`,
+  summary: `In my ${numberOfYears()}-year journey as a software developer, I've honed my skills in building intuitive and scalable web applications. I'm passionate about exploring cutting-edge technologies and creating impactful digital solutions. Along the way, I've delivered projects for startups and freelance clients and continuously worked on refining my craft to push the boundaries of what's possible in software development.`,
   avatarUrl: "https://avatars.githubusercontent.com/u/40756782?v=4",
   skills: [
     "Javascipt",
@@ -42,6 +42,8 @@ export const DATA = {
     "Azure",
     "Docker",
     "Kubernetes",
+    "Git",
+    "Langchain",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -102,12 +104,24 @@ export const DATA = {
       href: "https://www.exinous.com/",
       badges: [],
       location: "Mysuru, Karnataka, IN",
+      title: "Senior Software Developer",
+      logoUrl: "/exinousLogo.png",
+      start: "Jul 2025",
+      end: "Present",
+      description:
+        "Design and build intelligent web applications by combining modern software engineering practices with AI/ML integration. Lead technical initiatives, optimize system architecture, and mentor peers while developing robust, scalable solutions that drive business innovation.",
+    },
+    {
+      company: "Exinous Technologies",
+      href: "https://www.exinous.com/",
+      badges: [],
+      location: "Mysuru, Karnataka, IN",
       title: "Frontend Developer",
       logoUrl: "/exinousLogo.png",
       start: "Feb 2022",
-      end: "Present",
+      end: "Jul 2025",
       description:
-        "Contributed to the development of multiple web applications, working across both frontend and backend, utilizing modern frameworks and technologies to deliver robust and scalable solutions. Currently, focusing on learning DevOps practices and implementing small tasks to gain hands-on experience with CI/CD pipelines, containerization, and cloud deployment.",
+        "Contributed to the development of multiple web applications, working across both frontend and backend, utilizing modern frameworks and technologies to deliver robust and scalable solutions.",
     },
     {
       company: "Deshik Labs",
