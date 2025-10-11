@@ -13,11 +13,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }): Promise<Metadata | undefined> {
-  let post = await getPost(params.slug);
+  const { slug } = await params;
+  let post = await getPost(slug);
 
   let {
     title,
@@ -54,11 +55,12 @@ export async function generateMetadata({
 export default async function Blog({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }) {
-  let post = await getPost(params.slug);
+  const { slug } = await params;
+  let post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -88,7 +90,7 @@ export default async function Blog({
           }),
         }}
       />
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
+      <h1 className="title font-bold text-4xl tracking-tighter max-w-[650px]">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">

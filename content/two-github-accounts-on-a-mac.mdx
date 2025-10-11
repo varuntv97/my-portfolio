@@ -1,0 +1,558 @@
+---
+title: "Two GitHub Accounts on a Mac, the Simple Way"
+publishedAt: "2025-10-11"
+summary: "Complete guide to managing personal and work GitHub accounts on macOS with automatic identity switching, SSH key management, and folder-based Git configuration."
+image: ""
+readingTime: "8 min"
+tags: ["git", "github", "ssh", "macos", "development"]
+---
+
+Keeping personal and work code separate is healthy for your mind and your repos. This guide shows a simple way to use two GitHub accounts on one Mac. You will have two folders, one for work and one for personal. Git will pick the right identity for you based on where you are.
+
+## What You'll Learn
+
+- How to create and manage multiple SSH keys for different GitHub accounts
+- Setting up automatic Git identity switching based on folder location
+- Configuring SSH and Git to work seamlessly with multiple accounts
+- Troubleshooting common issues with dual GitHub account setups
+- Using a one-shot installer script for quick setup
+
+## Prerequisites
+
+- macOS (tested on macOS 10.15+)
+- Terminal access
+- Two GitHub accounts (personal and work)
+- Basic familiarity with command line and Git
+- About 10-15 minutes for complete setup
+
+## Table of Contents
+
+1. [Create folders and prepare SSH directory](#step-1-create-folders-and-prepare-ssh)
+2. [Create SSH keys for each account](#step-2-create-one-ssh-key-for-each-account)
+3. [Add public keys to GitHub accounts](#step-3-add-the-public-keys-to-the-right-github-accounts)
+4. [Configure SSH client](#step-4-create-or-edit-sshconfig)
+5. [Create per-scope Git configurations](#step-5-create-per-scope-git-configs)
+6. [Set up conditional Git config includes](#step-6-teach-git-to-include-the-right-config-by-folder)
+7. [Clean up global Git settings](#step-7-remove-any-old-global-identity)
+8. [Test the setup](#step-8-use-it-in-daily-work)
+9. [Troubleshooting](#troubleshooting-quick-checks)
+10. [One-shot installer](#one-shot-installer)
+11. [Health check script](#quick-health-check)
+
+---
+
+> Replace placeholders like `<WORK_EMAIL>`, `<PERSONAL_EMAIL>`, and `<YOUR_MACOS_USERNAME>` with your values.
+
+---
+
+## What you will create
+
+Files that will be created or updated:
+
+- `~/.ssh/id_ed25519_work` and `~/.ssh/id_ed25519_work.pub`
+- `~/.ssh/id_ed25519_personal` and `~/.ssh/id_ed25519_personal.pub`
+- `~/.ssh/config`
+- `~/.gitconfig-work`
+- `~/.gitconfig-personal`
+- `~/.gitconfig`
+
+Folder layout on disk:
+
+```bash
+/Users/<YOUR_MACOS_USERNAME>/developer/work/      # work repos
+/Users/<YOUR_MACOS_USERNAME>/developer/personal/  # personal repos
+```
+
+---
+
+## Step 1: Create folders and prepare `~/.ssh`
+
+**Time estimate:** 1 minute
+
+**Why this works:** We create separate directories for work and personal repositories, and ensure the SSH directory has proper permissions for security.
+
+```bash
+mkdir -p /Users/<YOUR_MACOS_USERNAME>/developer/work /Users/<YOUR_MACOS_USERNAME>/developer/personal ~/.ssh
+chmod 700 ~/.ssh
+```
+
+**Verification:**
+```bash
+ls -la ~/.ssh  # Should show drwx------ permissions
+ls -ld /Users/<YOUR_MACOS_USERNAME>/developer/work /Users/<YOUR_MACOS_USERNAME>/developer/personal  # Should show directories exist
+```
+
+---
+
+## Step 2: Create one SSH key for each account
+
+**Time estimate:** 3 minutes
+
+**Why this works:** Each GitHub account needs its own SSH key pair. ED25519 keys are more secure and efficient than RSA keys. The SSH agent manages these keys and macOS Keychain integration provides seamless authentication.
+
+```bash
+# Work key
+ssh-keygen -t ed25519 -C "<WORK_EMAIL>" -f ~/.ssh/id_ed25519_work
+
+# Personal key
+ssh-keygen -t ed25519 -C "<PERSONAL_EMAIL>" -f ~/.ssh/id_ed25519_personal
+
+# Start SSH agent and load keys into macOS Keychain
+# Note: eval "$(ssh-agent -s)" starts the SSH agent in the current shell
+# The --apple-use-keychain flag stores keys in macOS Keychain for persistence
+eval "$(ssh-agent -s)"
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_work
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_personal
+
+# Set secure permissions
+chmod 600 ~/.ssh/id_ed25519_work ~/.ssh/id_ed25519_personal
+chmod 644 ~/.ssh/id_ed25519_work.pub ~/.ssh/id_ed25519_personal.pub
+```
+
+**Note:** When prompted for a passphrase, you can either:
+- Enter a strong passphrase for extra security (recommended)
+- Press Enter twice for no passphrase (less secure but more convenient)
+
+**Verification:**
+```bash
+ssh-add -l  # Should list both keys
+ls -la ~/.ssh/id_ed25519_*  # Should show both key pairs with correct permissions
+```
+
+---
+
+## Step 3: Add the public keys to the right GitHub accounts
+
+**Time estimate:** 2 minutes
+
+**Why this works:** GitHub needs your public key to verify that you own the corresponding private key. Each account gets its own public key, ensuring proper authentication.
+
+Copy each key then add it in GitHub settings under SSH and GPG keys.
+
+```bash
+pbcopy < ~/.ssh/id_ed25519_work.pub         # paste into your WORK GitHub account
+pbcopy < ~/.ssh/id_ed25519_personal.pub     # paste into your PERSONAL GitHub account
+```
+
+**Keyboard shortcut:** `Cmd+C` copies selected text, `Cmd+V` pastes
+
+Use clear titles like `work-mac` and `personal-mac`.
+
+**Verification:** After adding keys to GitHub, test the connection:
+```bash
+ssh -T git@github.com  # Should work with your default account
+```
+
+---
+
+## Step 4: Create or edit `~/.ssh/config`
+
+**Time estimate:** 2 minutes
+
+**Why this works:** SSH config allows us to create aliases for GitHub that use different keys. The `IdentitiesOnly yes` directive ensures SSH only tries the specified key, preventing authentication confusion.
+
+This picks the correct key for each account.
+
+**File:** `~/.ssh/config`
+
+```sshconfig
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Host github.com-personal
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_personal
+  IdentitiesOnly yes
+
+Host github.com-work
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_work
+  IdentitiesOnly yes
+```
+
+**Verification:**
+```bash
+ssh -T git@github.com-personal    # should greet your personal username
+ssh -T git@github.com-work        # should greet your work username
+```
+
+---
+
+## Step 5: Create per scope Git configs
+
+**Time estimate:** 3 minutes
+
+**Why this works:** These per scope files make Git use the right identity and key based on the folder you are in. They set `user.name` and `user.email` for each scope so commits always carry the correct email, and they add `url.insteadOf` rules that rewrite normal GitHub URLs to the matching SSH host alias. That means you can keep using plain github.com clone URLs and Git will quietly choose the correct SSH key without prompts or special hostnames.
+
+The `url.insteadOf` rules are the magic that makes this seamless - they automatically rewrite URLs so you don't need to remember special hostnames.
+
+**File:** `~/.gitconfig-work`
+
+```ini
+[user]
+    name = Your Name (Work)
+    email = <WORK_EMAIL>
+
+[url "git@github.com-work:"]
+    insteadOf = git@github.com:
+[url "ssh://git@github.com-work/"]
+    insteadOf = ssh://git@github.com/
+[url "git@github.com-work:"]
+    insteadOf = https://github.com/
+```
+
+**File:** `~/.gitconfig-personal`
+
+```ini
+[user]
+    name = Your Name (Personal)
+    email = <PERSONAL_EMAIL>
+
+[url "git@github.com-personal:"]
+    insteadOf = git@github.com:
+[url "ssh://git@github.com-personal/"]
+    insteadOf = ssh://git@github.com/
+[url "git@github.com-personal:"]
+    insteadOf = https://github.com/
+```
+
+**Verification:**
+```bash
+# Test URL rewriting
+cd /tmp && git init test-repo
+cd test-repo
+echo '[url "git@github.com-work:"]
+    insteadOf = git@github.com:' > .git/config
+git remote add origin git@github.com:test/test.git
+git config --get remote.origin.url  # Should show git@github.com-work:test/test.git
+```
+
+---
+
+## Step 6: Teach Git to include the right config by folder
+
+**Time estimate:** 2 minutes
+
+**Why this works:** Git's `includeIf` directive allows conditional configuration based on the current working directory. This is what makes Git automatically switch identities based on which folder you're in.
+
+Use absolute paths and keep the trailing slashes.
+
+**File:** `~/.gitconfig`
+Append these lines:
+
+```ini
+[includeIf "gitdir:/Users/<YOUR_MACOS_USERNAME>/developer/work/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir:/Users/<YOUR_MACOS_USERNAME>/developer/personal/"]
+    path = ~/.gitconfig-personal
+```
+
+If `~/.gitconfig` did not exist, you can create it with only those lines.
+
+**Verification:**
+```bash
+# Test in work directory
+cd /Users/<YOUR_MACOS_USERNAME>/developer/work
+git config --show-origin --get user.email  # Should show work email
+
+# Test in personal directory
+cd /Users/<YOUR_MACOS_USERNAME>/developer/personal
+git config --show-origin --get user.email  # Should show personal email
+```
+
+---
+
+## Step 7: Remove any old global identity
+
+**Time estimate:** 1 minute
+
+**Why this works:** Removing global Git identity prevents conflicts and ensures that only the folder-specific identities are used. This avoids confusion during verification.
+
+This avoids confusion during checks later.
+
+```bash
+git config --global --unset user.name  || true
+git config --global --unset user.email || true
+```
+
+**Verification:**
+```bash
+git config --global --get user.name   # Should return nothing
+git config --global --get user.email  # Should return nothing
+```
+
+---
+
+## Step 8: Use it in daily work
+
+**Time estimate:** Ongoing
+
+**Why this works:** Now everything is set up! Git automatically detects which folder you're in and applies the correct identity and SSH key. You can use normal GitHub URLs everywhere.
+
+Use normal GitHub URLs. Git switches identity for you based on folder.
+
+```bash
+# Work
+cd /Users/<YOUR_MACOS_USERNAME>/developer/work
+git clone git@github.com:<YOUR_WORK_ORG>/<your-work-repo>.git
+cd <your-work-repo>
+git config --show-origin --get user.email   # shows <WORK_EMAIL>
+
+# Personal
+cd /Users/<YOUR_MACOS_USERNAME>/developer/personal
+git clone git@github.com:<YOUR_PERSONAL_USERNAME>/<your-personal-repo>.git
+cd <your-personal-repo>
+git config --show-origin --get user.email   # shows <PERSONAL_EMAIL>
+```
+
+**Keyboard shortcuts:**
+- `Cmd+T` - New Terminal tab
+- `Cmd+K` - Clear Terminal screen
+- `Cmd+Shift+C` - Copy in Terminal
+- `Cmd+Shift+V` - Paste in Terminal
+
+---
+
+## Troubleshooting quick checks
+
+### Permission denied (publickey)
+
+**Symptoms:** SSH authentication fails with "Permission denied (publickey)"
+
+**Solutions:**
+```bash
+# Check if keys are loaded
+ssh-add -l
+
+# Reload keys if needed
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_work
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_personal
+
+# Fix permissions
+chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && chmod 644 ~/.ssh/*.pub
+```
+
+Make sure the `~/.ssh/config` host blocks exist and have `IdentitiesOnly yes`.
+
+### Includes not triggering
+
+**Symptoms:** Git uses wrong identity or doesn't switch identities
+
+**Solutions:**
+```bash
+# Check current identity
+cd /path/to/your/repo
+git config --show-origin --get user.email
+
+# Verify includeIf paths
+cat ~/.gitconfig | grep -A2 includeIf
+```
+
+Confirm the `gitdir:` paths in `~/.gitconfig` are absolute and end with a slash. Check that the repo is actually inside the target folder.
+
+### HTTPS prompts
+
+**Symptoms:** Git asks for username/password instead of using SSH
+
+**Solutions:**
+Your scoped configs rewrite `https://github.com/` to SSH. If a remote still uses HTTPS, run:
+
+```bash
+git remote set-url origin "$(git remote get-url origin | sed 's#https://github.com/#git@github.com:#')"
+```
+
+### macOS Version Considerations
+
+- **macOS 10.12 and earlier:** Use `ssh-add -K` instead of `--apple-use-keychain`
+- **macOS 10.13+:** Use `--apple-use-keychain` flag
+- **Keychain Access:** If keys aren't persisting, check Keychain Access app for SSH keys
+
+### Alternative Methods
+
+**Method 1: Using Git Credential Manager**
+```bash
+# Install Git Credential Manager
+brew install --cask git-credential-manager-core
+
+# Configure for multiple accounts
+git config --global credential.helper manager-core
+```
+
+**Method 2: Using SSH Agent with different ports**
+```bash
+# Start SSH agent on different port
+ssh-agent -a /tmp/ssh-agent-work
+ssh-agent -a /tmp/ssh-agent-personal
+```
+
+---
+
+## One shot installer
+
+**Time estimate:** 2 minutes
+
+**Why this works:** This script automates all the manual steps above. It's idempotent (safe to run multiple times) and handles edge cases like existing keys and configs.
+
+If you prefer a single script, copy this into Terminal, then add the printed keys in GitHub.
+
+```bash
+# Your details
+PERSONAL_EMAIL="<PERSONAL_EMAIL>"
+WORK_EMAIL="<WORK_EMAIL>"
+WORKDIR="/Users/<YOUR_MACOS_USERNAME>/developer/work/"
+PERSONALDIR="/Users/<YOUR_MACOS_USERNAME>/developer/personal/"
+
+set -e
+
+mkdir -p "$WORKDIR" "$PERSONALDIR" ~/.ssh
+chmod 700 ~/.ssh
+
+# Create keys if missing
+[[ -f ~/.ssh/id_ed25519_work ]] || ssh-keygen -t ed25519 -C "$WORK_EMAIL" -f ~/.ssh/id_ed25519_work -N ""
+[[ -f ~/.ssh/id_ed25519_personal ]] || ssh-keygen -t ed25519 -C "$PERSONAL_EMAIL" -f ~/.ssh/id_ed25519_personal -N ""
+
+# Start agent and add keys
+eval "$(ssh-agent -s)"
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_work
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_personal
+
+# Permissions
+chmod 600 ~/.ssh/id_ed25519_work ~/.ssh/id_ed25519_personal 2>/dev/null || true
+chmod 644 ~/.ssh/id_ed25519_work.pub ~/.ssh/id_ed25519_personal.pub 2>/dev/null || true
+
+# ~/.ssh/config
+cat > ~/.ssh/config <<'EOF'
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Host github.com-personal
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_personal
+  IdentitiesOnly yes
+
+Host github.com-work
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_work
+  IdentitiesOnly yes
+EOF
+chmod 600 ~/.ssh/config
+
+# ~/.gitconfig-work
+cat > ~/.gitconfig-work <<EOF
+[user]
+    name = Your Name (Work)
+    email = $WORK_EMAIL
+[url "git@github.com-work:"]
+    insteadOf = git@github.com:
+[url "ssh://git@github.com-work/"]
+    insteadOf = ssh://git@github.com/
+[url "git@github.com-work:"]
+    insteadOf = https://github.com/
+EOF
+
+# ~/.gitconfig-personal
+cat > ~/.gitconfig-personal <<EOF
+[user]
+    name = Your Name (Personal)
+    email = $PERSONAL_EMAIL
+[url "git@github.com-personal:"]
+    insteadOf = git@github.com:
+[url "ssh://git@github.com-personal/"]
+    insteadOf = ssh://git@github.com/
+[url "git@github.com-personal:"]
+    insteadOf = https://github.com/
+EOF
+
+# Ensure ~/.gitconfig exists
+touch ~/.gitconfig
+
+# Remove old includeIf blocks for these dirs
+sed -i '' '/\[includeIf "gitdir:.*developer\/work\/"\]/{N;N;d;}' ~/.gitconfig 2>/dev/null || true
+sed -i '' '/\[includeIf "gitdir:.*developer\/personal\/"\]/{N;N;d;}' ~/.gitconfig 2>/dev/null || true
+
+# Append correct includeIf blocks
+{
+  echo
+  echo "[includeIf \"gitdir:${WORKDIR}\"]"
+  echo "    path = ~/.gitconfig-work"
+  echo
+  echo "[includeIf \"gitdir:${PERSONALDIR}\"]"
+  echo "    path = ~/.gitconfig-personal"
+} >> ~/.gitconfig
+
+echo "-----------------------------------------"
+echo "Done. Add these public keys in GitHub settings."
+echo
+echo "WORK key:"
+cat ~/.ssh/id_ed25519_work.pub
+echo
+echo "PERSONAL key:"
+cat ~/.ssh/id_ed25519_personal.pub
+echo "-----------------------------------------"
+echo "Then test:"
+echo "ssh -T git@github.com-work"
+echo "ssh -T git@github.com-personal"
+```
+
+---
+
+## Quick health check
+
+**Time estimate:** 1 minute
+
+**Why this works:** This diagnostic script checks all components of your setup and provides a comprehensive status report. It's useful for troubleshooting and verifying everything is working correctly.
+
+This script gives you a short status readout.
+
+```bash
+cat <<'CHK' > /tmp/git-ssh-healthcheck.sh
+#!/usr/bin/env bash
+set -e
+echo "SSH agent keys:"
+ssh-add -l || true
+echo
+echo "~/.ssh/config hosts:"
+grep -E 'Host github.com-(personal|work)' -n ~/.ssh/config || true
+echo
+echo "Git includes and identities:"
+git config --list --show-origin | grep -E 'includeIf|user.name|user.email' || true
+echo
+echo "Testing SSH identities:"
+ssh -T git@github.com-work || true
+ssh -T git@github.com-personal || true
+CHK
+bash /tmp/git-ssh-healthcheck.sh
+```
+
+## Conclusion
+
+That's it! You now have a robust setup for managing two GitHub accounts on a Mac. Here's what you've accomplished:
+
+- **Automatic identity switching:** Git automatically uses the correct identity based on which folder you're working in
+- **Seamless SSH authentication:** No more password prompts or authentication errors
+- **Clean separation:** Work and personal repositories are completely isolated
+- **Easy maintenance:** The setup is self-contained and easy to troubleshoot
+
+Put work repos in the work folder and personal repos in the personal folder. Use normal GitHub URLs. Git will pick the right identity for you.
+
+## Next Steps
+
+- Set up your IDE/editor to use the correct Git identity
+- Add commit signing. Use SSH or GPG so commits show as verified.
+
+## Related Resources
+
+- [Git Documentation - Conditional Includes](https://git-scm.com/docs/git-config#_conditional_includes)
+- [GitHub SSH Key Documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+- [SSH Config Manual](https://man.openbsd.org/ssh_config)
+- [Git URL Rewriting](https://git-scm.com/docs/git-config#git-config-urlltbasegtinsteadOf)
+- [macOS Keychain Integration](https://developer.apple.com/documentation/security/keychain_services)
+- [Git Commit Signing with SSH](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification)
+- [Git Commit Signing with GPG](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)

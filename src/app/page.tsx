@@ -59,11 +59,11 @@ export default function Page() {
           </BlurFade>
           {DATA.work.map((work, id) => (
             <BlurFade
-              key={work.company}
+              key={`${work.company}-${id}`}
               delay={BLUR_FADE_DELAY * 6 + id * 0.05}
             >
               <ResumeCard
-                key={work.company}
+                key={`${work.company}-${id}`}
                 logoUrl={work.logoUrl}
                 altText={work.company}
                 title={work.company}
