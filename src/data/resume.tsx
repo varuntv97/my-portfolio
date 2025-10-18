@@ -148,6 +148,29 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "RaviKumar M & Associates",
+      href: "https://ravikumarmassociates.com",
+      dates: "June 2025",
+      active: true,
+      description:
+        "Developed a custom website for a Valuation & Real Estate firm, focusing on user experience and responsive design.",
+      technologies: [
+        "CSS",
+        "HTML",
+        "JavaScript",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://ravikumarmassociates.com",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/ravikumarmassociates.png",
+      video:
+        "",
+    },
+    {
       title: "Sanchara",
       href: "https://sanchara.vercel.app/",
       dates: "March 2025",
