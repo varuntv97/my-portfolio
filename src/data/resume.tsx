@@ -20,15 +20,14 @@ export const DATA = {
     `Senior Software Developer with ${numberOfYears()} years of experience, passionate about modern technologies and user experiences.`,
   // summary:
   //   "At the end of 2022, I quit my job as a software engineer to go fulltime into building and scaling my own SaaS businesses. In the past, [I pursued a double degree in computer science and business](/#education), [interned at big tech companies in Silicon Valley](https://www.youtube.com/watch?v=d-LJ2e5qKdE), and [competed in over 21 hackathons for fun](/#hackathons). I also had the pleasure of being a part of the first ever in-person cohort of buildspace called [buildspace sf1](https://buildspace.so/sf1).",
-  summary: `In my ${numberOfYears()}-year journey as a software developer, I've honed my skills in building intuitive and scalable web applications. I'm passionate about exploring cutting-edge technologies and creating impactful digital solutions. Along the way, I've delivered projects for startups and freelance clients and continuously worked on refining my craft to push the boundaries of what's possible in software development.`,
+  summary: `I'm a [senior software developer](#work) with [${numberOfYears()} years of experience](/#about) building [intuitive, scalable software applications](/#projects). I enjoy exploring [cutting-edge technologies](#skills) and have delivered [impactful solutions for diverse clients](/#projects), consistently refining my craft to push the boundaries of [modern software development](#skills).`,
   avatarUrl: "https://avatars.githubusercontent.com/u/40756782?v=4",
   skills: [
-    "Javascipt",
-    "Typescript",
+    "JavaScript",
+    "TypeScript",
     "Vue.js",
     "React",
     "Next.js",
-    "Tailwind CSS",
     "Python",
     "Go",
     "Express.js",
@@ -109,7 +108,7 @@ export const DATA = {
       start: "Jul 2025",
       end: "Present",
       description:
-        "Design and build intelligent web applications by combining modern software engineering practices with AI/ML integration. Lead technical initiatives, optimize system architecture, and mentor peers while developing robust, scalable solutions that drive business innovation.",
+        "Design and build intelligent web applications by combining modern software engineering practices with AI integration. Lead technical initiatives, optimize system architecture, and mentor peers while developing robust, scalable solutions that drive business innovation.",
     },
     {
       company: "Exinous Technologies",
@@ -329,7 +328,7 @@ export const DATA = {
       description:
         "Crafted an immersive and dynamic 3D sphere experience leveraging technologies like Three.js, GSAP, showcasing creative animation.",
       technologies: [
-        "Javascript",
+        "JavaScript",
         "three js",
         "GSAP",
         "Vite",
@@ -347,44 +346,44 @@ export const DATA = {
       video: "",
     },
   ],
-  process: [
-    {
-      title: "Understand",
-      description:
-        "I start by understanding the project goals, target audience, and the vision. Through detailed discussions and research, I ensure every requirement is crystal clear.",
-      image: "",
-    },
-    {
-      title: "Plan",
-      description:
-        "I map out the project with a solid plan, including wireframes and timelines. This stage sets the foundation for smooth execution and aligns expectations.",
-      image: "",
-    },
-    {
-      title: "Design",
-      description:
-        "I craft intuitive and aesthetically pleasing designs that balance functionality with creativity. Every pixel and interaction is designed to enhance user experience.",
-      image: "",
-    },
-    {
-      title: "Develop",
-      description:
-        "I bring designs to life with clean, scalable code. I leverage modern technologies and best practices to build robust and performant web applications.",
-      image: "",
-    },
-    {
-      title: "Test",
-      description:
-        "I rigorously test the application to ensure it meets quality standards. I perform various tests to identify and fix bugs, ensuring a seamless user experience.",
-      image: "",
-    },
-    {
-      title: "Deliver",
-      description:
-        "I deliver a polished product on time and provide support to ensure everything runs smoothly post-launch. Your satisfaction is my top priority.",
-      image: "",
-    }
-  ],
+  // process: [
+  //   {
+  //     title: "Understand",
+  //     description:
+  //       "I start by understanding the project goals, target audience, and the vision. Through detailed discussions and research, I ensure every requirement is crystal clear.",
+  //     image: "",
+  //   },
+  //   {
+  //     title: "Plan",
+  //     description:
+  //       "I map out the project with a solid plan, including wireframes and timelines. This stage sets the foundation for smooth execution and aligns expectations.",
+  //     image: "",
+  //   },
+  //   {
+  //     title: "Design",
+  //     description:
+  //       "I craft intuitive and aesthetically pleasing designs that balance functionality with creativity. Every pixel and interaction is designed to enhance user experience.",
+  //     image: "",
+  //   },
+  //   {
+  //     title: "Develop",
+  //     description:
+  //       "I bring designs to life with clean, scalable code. I leverage modern technologies and best practices to build robust and performant web applications.",
+  //     image: "",
+  //   },
+  //   {
+  //     title: "Test",
+  //     description:
+  //       "I rigorously test the application to ensure it meets quality standards. I perform various tests to identify and fix bugs, ensuring a seamless user experience.",
+  //     image: "",
+  //   },
+  //   {
+  //     title: "Deliver",
+  //     description:
+  //       "I deliver a polished product on time and provide support to ensure everything runs smoothly post-launch. Your satisfaction is my top priority.",
+  //     image: "",
+  //   }
+  // ],
   // hackathons: [
   //   {
   //     title: "Hack Western 5",

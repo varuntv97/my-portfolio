@@ -61,13 +61,18 @@ export function ProjectCard({
           />
         )}
         {image && (
-          <Image
-            src={image}
-            alt={title}
-            width={500}
-            height={300}
-            className="h-40 w-full overflow-hidden object-cover object-top"
-          />
+          <div className="relative h-40 w-full overflow-hidden bg-muted">
+            <Image
+              src={image}
+              alt={title}
+              width={500}
+              height={300}
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlN2ViIi8+PHJlY3QgeD0iMjAlIiB5PSIzMCUiIHdpZHRoPSI2MCUiIGhlaWdodD0iNDAlIiByeD0iOCIgZmlsbD0iI2QxZDVkYiIvPjwvc3ZnPg=="
+              className="h-40 w-full object-cover object-top transition-opacity duration-300"
+            />
+          </div>
         )}
       </Link>
       <CardHeader className="px-2">
