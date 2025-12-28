@@ -4,12 +4,25 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fontSans = FontSans({
+const fontHeading = Outfit({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const fontSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const fontMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,6 +32,26 @@ export const metadata: Metadata = {
     template: `%s | ${DATA.name}`,
   },
   description: DATA.description,
+  keywords: [
+    "Varun TV",
+    "Software Developer",
+    "Senior Software Developer",
+    "Frontend Developer",
+    "React",
+    "Next.js",
+    "Vue.js",
+    "TypeScript",
+    "JavaScript",
+    "Web Development",
+    "Mysuru",
+    "Karnataka",
+    "India",
+    "Full Stack Developer",
+    "AI Integration",
+  ],
+  authors: [{ name: "Varun TV", url: DATA.url }],
+  creator: "Varun TV",
+  publisher: "Varun TV",
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
@@ -41,6 +74,8 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
+    description: DATA.description,
+    creator: "@varuntv97",
   },
   verification: {
     google: "",
@@ -83,8 +118,11 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
+          fontSans.variable,
+          fontHeading.variable,
+          fontMono.variable
         )}
+        suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider delayDuration={0}>
