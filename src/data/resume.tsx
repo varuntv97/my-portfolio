@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { CodeXml, HomeIcon, NotebookPen } from "lucide-react";
+import { CodeXml, HomeIcon, NotebookPen, Globe, Smartphone, Sparkles, Wrench, Palette, Database } from "lucide-react";
 
 const numberOfYears = (): number => {
   const currentDate = new Date();
@@ -769,4 +769,42 @@ export const DATA = {
   //     ],
   //   },
   // ],
+  services: [
+    {
+      title: "Web Application Development",
+      description:
+        "Full-stack web applications built with modern frameworks like React, Next.js, and Vue.js. Scalable, performant, and user-friendly solutions tailored to your needs.",
+      icon: Globe,
+    },
+    {
+      title: "Frontend Development",
+      description:
+        "Pixel-perfect, responsive user interfaces with smooth animations and exceptional user experience. From design to deployment.",
+      icon: Palette,
+    },
+    {
+      title: "Backend & API Development",
+      description:
+        "Robust REST APIs and backend services using Node.js, Python, and Go. Secure, scalable, and well-documented endpoints.",
+      icon: Database,
+    },
+    {
+      title: "AI/ML Integration",
+      description:
+        "Integrate AI capabilities into your applications using LangChain, OpenAI, and other cutting-edge AI/ML tools to enhance user experiences.",
+      icon: Sparkles,
+    },
+    {
+      title: "Mobile Application Development",
+      description:
+        "Cross-platform mobile applications using React Native and modern frameworks. Native-like performance with shared codebase.",
+      icon: Smartphone,
+    },
+    {
+      title: "Maintenance & Support",
+      description:
+        "Ongoing support, bug fixes, and feature enhancements to keep your applications running smoothly and up-to-date.",
+      icon: Wrench,
+    },
+  ],
 } as const;

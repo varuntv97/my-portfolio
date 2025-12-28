@@ -7,6 +7,7 @@ import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { ProcessCard } from "@/components/process-card";
+import { ServiceCard } from "@/components/service-card";
 import Avatar from "@/components/avatar-card";
 import { ChevronRight } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
@@ -15,7 +16,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
+    <main className="flex flex-col min-h-[100dvh] space-y-16">
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
               <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
@@ -118,12 +119,12 @@ export default function Page() {
         </div>
       </section>
       <section id="projects">
-        <div className="space-y-12 w-full py-12">
+        <div className="space-y-12 w-full pt-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  My Projects
+                  Projects
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
                   Check out my latest work
@@ -241,8 +242,43 @@ export default function Page() {
           </BlurFade>
         </div>
       </section> */}
+      <section id="services">
+        <div className="space-y-12 w-full">
+          <BlurFade delay={BLUR_FADE_DELAY * 13}>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                  Services
+                </div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
+                  What I Can Do For You
+                </h2>
+                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-[600px] mx-auto">
+                  From concept to deployment, I offer end-to-end development services to bring your ideas to life with modern technologies and best practices.
+                </p>
+              </div>
+            </div>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 14}>
+            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
+              {DATA.services.map((service, id) => (
+                <BlurFade
+                  key={service.title}
+                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
+                >
+                  <ServiceCard
+                    title={service.title}
+                    description={service.description}
+                    icon={service.icon}
+                  />
+                </BlurFade>
+              ))}
+            </ul>
+          </BlurFade>
+        </div>
+      </section>
       <section id="contact">
-        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
+        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full mb-20">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-3">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
