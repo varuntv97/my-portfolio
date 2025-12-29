@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { CodeXml, HomeIcon, NotebookPen, Globe, Smartphone, Sparkles, Wrench, Palette, Database } from "lucide-react";
+import { CodeXml, HomeIcon, NotebookPen, Globe, Smartphone, Wrench, Palette, Database, Brain } from "lucide-react";
 
 const numberOfYears = (): number => {
   const currentDate = new Date();
@@ -791,13 +791,13 @@ export const DATA = {
     {
       title: "AI/ML Integration",
       description:
-        "Integrate AI capabilities into your applications using LangChain, OpenAI, and other cutting-edge AI/ML tools to enhance user experiences.",
-      icon: Sparkles,
+        "Integrate AI capabilities into your applications using cutting-edge AI/ML tools to enhance user experiences and streamline your workflows.",
+      icon: Brain,
     },
     {
       title: "Mobile Application Development",
       description:
-        "Cross-platform mobile applications using React Native and modern frameworks. Native-like performance with shared codebase.",
+        "Cross-platform mobile applications using React Native and other modern frameworks. Native-like performance with shared codebase.",
       icon: Smartphone,
     },
     {
