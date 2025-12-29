@@ -19,16 +19,3 @@ updates:
         update-types:
           - "minor"
           - "patch"
-
-  # GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    reviewers:
-      - "varuntv97"
-    labels:
-      - "dependencies"
-    commit-message:
-      prefix: "chore(actions)"
