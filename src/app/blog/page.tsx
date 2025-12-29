@@ -5,6 +5,9 @@ import Link from "next/link";
 export const metadata = {
   title: "Blog",
   description: "My thoughts on software development, life, and more.",
+  alternates: {
+    canonical: "https://varuntv.me/blog",
+  },
 };
 
 const BLUR_FADE_DELAY = 0.04;

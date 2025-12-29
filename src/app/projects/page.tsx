@@ -1,6 +1,15 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA } from "@/data/resume";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "A collection of projects I've worked on — from websites to AI-powered applications.",
+  alternates: {
+    canonical: `${DATA.url}/projects`,
+  },
+};
 
 const BLUR_FADE_DELAY = 0.04;
 
