@@ -298,9 +298,8 @@ export default function Page() {
                 </Link>{" "}
                 or{" "}
                 <Link
-                  href={DATA.contact.email}
+                  href={`mailto:${DATA.contact.email}`}
                   className="text-blue-500 hover:underline"
-                  target="_blank" rel="noopener noreferrer"
                 >
                   Email
                 </Link>{" "}
