@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { CodeXml, HomeIcon, BookOpen, Globe, Smartphone, Wrench, Palette, Database, Brain } from "lucide-react";
+import { CodeXml, HomeIcon, NotebookPen, Globe, Smartphone, Wrench, Palette, Database, Brain } from "lucide-react";
 
 const numberOfYears = (): number => {
   const currentDate = new Date();
@@ -46,7 +46,7 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: BookOpen, label: "Blog" },
+    { href: "/blog", icon: NotebookPen, label: "Blog" },
     { href: "/projects", icon: CodeXml, label: "Projects" },
   ],
   contact: {
