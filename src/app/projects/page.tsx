@@ -14,10 +14,10 @@ export default function ProjectsPage() {
             <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
               My Projects
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tighter font-heading sm:text-5xl">
                 Check Out What I&apos;ve Built
             </h2>
-            <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed font-sans">
             From small ideas to big builds, here&apos;s where you&apos;ll find all the projects I&apos;ve enjoyed creating.
             </p>
           </div>
