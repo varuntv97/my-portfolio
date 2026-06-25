@@ -18,9 +18,8 @@ I'm Varun TV, a software developer based in Mysuru, Karnataka, India. I speciali
    cd my-portfolio
    ```
 
-2. **Install dependencies** (requires Node.js 25 — see `.nvmrc`)
+2. **Install dependencies**
    ```bash
-   nvm use
    pnpm install
    ```
 
