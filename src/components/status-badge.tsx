@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 
 interface StatusBadgeProps {
-  status?: "available" | "busy" | "open-to-opportunities";
+  status?: "available" | "busy" | "open-to-opportunities" | "active";
   className?: string;
 }
 
@@ -32,6 +32,13 @@ export function StatusBadge({
       bgColor: "bg-blue-500/10 dark:bg-blue-500/20",
       textColor: "text-blue-700 dark:text-blue-400",
       ringColor: "ring-blue-500/30",
+    },
+    active: {
+      text: "Active",
+      dotColor: "bg-green-500",
+      bgColor: "bg-green-500/10 dark:bg-green-500/20",
+      textColor: "text-green-700 dark:text-green-400",
+      ringColor: "ring-green-500/30",
     },
   };
 

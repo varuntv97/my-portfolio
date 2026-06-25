@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { ProcessCard } from "@/components/process-card";
-import { ServiceCard } from "@/components/service-card";
+// import { ProcessCard } from "@/components/process-card";
+// import { ServiceCard } from "@/components/service-card";
 import Avatar from "@/components/avatar-card";
 import { ChevronRight } from "lucide-react";
 import { StatusBadge } from "@/components/status-badge";
@@ -20,7 +20,7 @@ export default function Page() {
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
               <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
-                <StatusBadge status="available" />
+                <StatusBadge status="active" />
               </BlurFade>
           <div className="gap-2 flex justify-between">
             <div className="flex-col flex flex-1 space-y-1.5">
@@ -242,7 +242,7 @@ export default function Page() {
           </BlurFade>
         </div>
       </section> */}
-      <section id="services">
+      {/* <section id="services">
         <div className="space-y-12 w-full">
           <BlurFade delay={BLUR_FADE_DELAY * 13}>
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -276,7 +276,7 @@ export default function Page() {
             </ul>
           </BlurFade>
         </div>
-      </section>
+      </section> */}
       <section id="contact">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full mb-20">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
@@ -288,7 +288,8 @@ export default function Page() {
                 Get in Touch
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Have a project in mind? Let&apos;s talk about it. Reach out via {" "}
+              {/* Have a project in mind? Let&apos;s talk about it.  */}
+              Reach out via {" "}
                 <Link
                   href={DATA.contact.social.LinkedIn.url}
                   className="text-blue-500 hover:underline"
