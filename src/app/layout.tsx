@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import { StripedPattern } from "@/components/magicui/striped-pattern";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -117,19 +118,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
+          "relative min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
           fontHeading.variable,
           fontMono.variable
         )}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
-          </TooltipProvider>
-        </ThemeProvider>
+        <StripedPattern className="fixed inset-0 z-0 stroke-[0.75] text-foreground/10 dark:text-foreground/15 [mask-image:radial-gradient(ellipse_80%_60%_at_50%_20%,white,transparent)]" />
+        <div className="relative z-10 mx-auto max-w-2xl px-6 py-12 sm:py-24">
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <TooltipProvider delayDuration={0}>
+              {children}
+              <Navbar />
+            </TooltipProvider>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

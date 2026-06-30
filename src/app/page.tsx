@@ -1,5 +1,6 @@
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
+import { ThemeAuroraText } from "@/components/magicui/theme-aurora-text";
+import { ThemeHighlighter } from "@/components/magicui/theme-highlighter";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Badge } from "@/components/ui/badge";
@@ -24,17 +25,19 @@ export default function Page() {
               </BlurFade>
           <div className="gap-2 flex justify-between">
             <div className="flex-col flex flex-1 space-y-1.5">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-heading text-balance"
-                yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
-              />
-              <BlurFadeText
-                className="max-w-[600px] md:text-xl text-pretty"
-                delay={BLUR_FADE_DELAY * 1.5}
-                text={DATA.description}
-              />
+              <BlurFade delay={BLUR_FADE_DELAY} yOffset={8}>
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-heading text-balance">
+                  Hi, I&apos;m{" "}
+                  <ThemeHighlighter>{DATA.name}</ThemeHighlighter>
+                  {/* <span className="text-muted-foreground">{" "}👋</span> */}
+                </h1>
+              </BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY * 1.5}>
+                <p className="max-w-[600px] md:text-xl text-pretty text-muted-foreground">
+                  <ThemeAuroraText>{DATA.roleTitle}</ThemeAuroraText>
+                  {` with ${DATA.experienceYears} years of experience, passionate about modern technologies and user experiences.`}
+                </p>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar

@@ -8,7 +8,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
-type Metadata = {
+export type PostMetadata = {
   title: string;
   publishedAt: string;
   summary: string;
@@ -45,7 +45,7 @@ export async function getPost(slug: string) {
   const content = await markdownToHTML(rawContent);
   return {
     source: content,
-    metadata,
+    metadata: metadata as PostMetadata,
     slug,
   };
 }

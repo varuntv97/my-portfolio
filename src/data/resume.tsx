@@ -16,6 +16,8 @@ export const DATA = {
   url: "https://varuntv.me",
   location: "Mysuru, Karnataka, IN",
   locationLink: "https://www.google.co.in/maps/place/Mysuru,+Karnataka/@12.3106334,76.5532878,12z/data=!3m1!4b1!4m6!3m5!1s0x3baf70381d572ef9:0x2b89ece8c0f8396d!8m2!3d12.2958104!4d76.6393805!16zL20vMGo2MDM?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D",
+  roleTitle: "Senior Software Developer",
+  experienceYears: numberOfYears(),
   description:
     `Senior Software Developer with ${numberOfYears()} years of experience, passionate about modern technologies and user experiences.`,
   // summary:
