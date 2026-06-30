@@ -1,21 +1,23 @@
-import Navbar from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Onest, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fontHeading = Outfit({
+const fontSans = Onest({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const fontSans = DM_Sans({
+// Onest doubles as the display/heading face, matching the Paperfolio template.
+const fontHeading = Onest({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -117,17 +119,20 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
           fontHeading.variable,
           fontMono.variable
         )}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
           </TooltipProvider>
         </ThemeProvider>
       </body>

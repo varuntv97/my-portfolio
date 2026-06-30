@@ -1,315 +1,213 @@
-import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { ProjectCard } from "@/components/project-card";
-import { ResumeCard } from "@/components/resume-card";
-import { Badge } from "@/components/ui/badge";
+import { BlogCard } from "@/components/blog-card";
+import { Marquee } from "@/components/marquee";
+import { PortfolioCard } from "@/components/portfolio-card";
+import { SectionHeading } from "@/components/section-heading";
+import { CtaSection } from "@/components/sections/cta";
+import { Hero } from "@/components/sections/hero";
+import { ServiceCard } from "@/components/service-card";
+import { Testimonials } from "@/components/testimonials";
+import { Timeline } from "@/components/timeline";
+import { Button } from "@/components/ui/button";
+import { getBlogPosts } from "@/data/blog";
 import { DATA } from "@/data/resume";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Markdown from "react-markdown";
-// import { ProcessCard } from "@/components/process-card";
-// import { ServiceCard } from "@/components/service-card";
-import Avatar from "@/components/avatar-card";
-import { ChevronRight } from "lucide-react";
-import { StatusBadge } from "@/components/status-badge";
 
-const BLUR_FADE_DELAY = 0.04;
+export default async function Home() {
+  const posts = (await getBlogPosts())
+    .sort(
+      (a, b) =>
+        new Date(b.metadata.publishedAt).getTime() -
+        new Date(a.metadata.publishedAt).getTime()
+    )
+    .slice(0, 3);
 
-export default function Page() {
+  const featured = DATA.featuredProjects
+    .map((slug) => DATA.projects.find((p) => p.slug === slug))
+    .filter((p): p is (typeof DATA.projects)[number] => Boolean(p))
+    .slice(0, 2);
+
+  const workTimeline = DATA.work.map((w) => ({
+    title: w.title,
+    subtitle: w.company,
+    href: w.href,
+    logoUrl: w.logoUrl,
+    period: `${w.start} — ${w.end}`,
+    location: w.location,
+    description: w.description,
+  }));
+
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-16">
-      <section id="hero">
-        <div className="mx-auto w-full max-w-2xl space-y-8">
-              <BlurFade delay={BLUR_FADE_DELAY * 0.5}>
-                <StatusBadge status="active" />
-              </BlurFade>
-          <div className="gap-2 flex justify-between">
-            <div className="flex-col flex flex-1 space-y-1.5">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none font-heading text-balance"
-                yOffset={8}
-                text={`Hi, I'm ${DATA.name.split(" ")[0]} 👋`}
-              />
-              <BlurFadeText
-                className="max-w-[600px] md:text-xl text-pretty"
-                delay={BLUR_FADE_DELAY * 1.5}
-                text={DATA.description}
-              />
-            </div>
-            <BlurFade delay={BLUR_FADE_DELAY}>
-              <Avatar
-                alt={DATA.name}
-                src={DATA.avatarUrl}
-                initials={DATA.initials}
-              />
-            </BlurFade>
-          </div>
-        </div>
-      </section>
-      <section id="about">
-        <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold font-heading">About</h2>
-        </BlurFade>
-        <BlurFade delay={BLUR_FADE_DELAY * 4}>
-          <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-            <Markdown>{DATA.summary}</Markdown>
-          </div>
-        </BlurFade>
-      </section>
-      <section id="work">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold font-heading">Work Experience</h2>
-          </BlurFade>
-          {DATA.work.map((work, id) => (
-            <BlurFade
-              key={`${work.company}-${id}`}
-              delay={BLUR_FADE_DELAY * 6 + id * 0.05}
+    <>
+      <Hero />
+
+      {/* Tech marquee */}
+      <section className="border-y border-border bg-card py-8">
+        <p className="container-px mb-6 text-center text-sm font-medium uppercase tracking-wider text-muted-foreground">
+          Technologies I work with
+        </p>
+        <Marquee durationSeconds={40}>
+          {DATA.skills.map((skill) => (
+            <span
+              key={skill}
+              className="font-heading text-xl font-semibold text-muted-foreground/70 sm:text-2xl"
             >
-              <ResumeCard
-                key={`${work.company}-${id}`}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} - ${work.end ?? "Present"}`}
-                description={work.description}
-              />
-            </BlurFade>
+              {skill}
+            </span>
+          ))}
+        </Marquee>
+      </section>
+
+      {/* Services */}
+      <section className="container-px py-16 md:py-24">
+        <SectionHeading
+          eyebrow="What I do"
+          title="Services I offer"
+          description="From idea to deployment — I help teams and founders ship modern, scalable software."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {DATA.services.map((service, i) => (
+            <ServiceCard
+              key={service.title}
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+              index={i}
+            />
           ))}
         </div>
       </section>
-      <section id="education">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold font-heading">Education</h2>
-          </BlurFade>
-          {DATA.education.map((education, id) => (
-            <BlurFade
-              key={education.school}
-              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
-            >
-              <ResumeCard
-                key={education.school}
-                href={education.href}
-                logoUrl={education.logoUrl}
-                altText={education.school}
-                title={education.school}
-                subtitle={education.degree}
-              // period={`${education.start} - ${education.end}`}
-              />
-            </BlurFade>
-          ))}
-        </div>
-      </section>
-      <section id="skills">
-        <div className="flex min-h-0 flex-col gap-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold font-heading">Skills</h2>
-          </BlurFade>
-          <div className="flex flex-wrap gap-1">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill}>{skill}</Badge>
-              </BlurFade>
+
+      {/* About teaser + stats */}
+      <section className="container-px py-16 md:py-24">
+        <div className="grid items-center gap-12 rounded-[2.5rem] border border-border bg-card p-8 md:grid-cols-2 md:p-14">
+          <div className="flex flex-col gap-6">
+            <SectionHeading
+              eyebrow="A bit about me"
+              title="Years of turning ideas into shipped products"
+            />
+            <p className="text-muted-foreground">{DATA.about.intro}</p>
+            <Button asChild className="w-fit rounded-full font-semibold">
+              <Link href="/about">
+                More about me
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            {DATA.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-secondary p-5 text-center"
+              >
+                <span className="font-heading text-3xl font-bold text-primary sm:text-4xl">
+                  {stat.value}
+                </span>
+                <span className="text-xs text-muted-foreground sm:text-sm">
+                  {stat.label}
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </section>
-      <section id="projects">
-        <div className="space-y-12 w-full pt-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 11}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Projects
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
-                  Check out my latest work
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I&apos;ve worked on a variety of projects, from simple
-                  websites to complex web applications. Here are a few of my
-                  favorites.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-            {DATA.projects.map((project, id) => (
-              <BlurFade
-                key={project.title}
-                delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-              >
-                <ProjectCard
-                  href={project.href}
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links}
-                />
-              </BlurFade>
-            )).slice(0, 4)}
-          </div>
-          <BlurFade delay={BLUR_FADE_DELAY * 12 + 4 * 0.05}>
-            <Link href="/projects" className="hover:underline text-center block mt-4 text-sm font-medium">View All Projects
-            <ChevronRight className="w-4 h-4 inline-block" />
+
+      {/* Featured projects */}
+      <section className="container-px py-16 md:py-24">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading
+            eyebrow="Selected work"
+            title="Featured projects"
+            description="A few projects I'm proud of. Each one is a real product solving a real problem."
+          />
+          <Button asChild variant="outline" className="rounded-full font-semibold">
+            <Link href="/portfolio">
+              Browse all
+              <ArrowRight className="size-4" />
             </Link>
-          </BlurFade>
+          </Button>
+        </div>
+        <div className="mt-12 flex flex-col gap-8">
+          {featured.map((project, i) => (
+            <PortfolioCard
+              key={project.slug}
+              slug={project.slug}
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              image={project.image}
+              technologies={project.technologies}
+              layout="split"
+              reverse={i % 2 === 1}
+            />
+          ))}
         </div>
       </section>
-      {/* <section id="process">
-        <div className="space-y-12 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 13}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  My Process
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
-                  How I Bring Ideas to Life
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I follow a structured yet flexible process to transform concepts into exceptional digital experiences. From gathering requirements to delivering a polished product, every step is designed to ensure clarity, creativity, and quality.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.process.map((p, id) => (
-                <BlurFade
-                  key={p.title + id}
-                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
-                >
-                  <ProcessCard
-                    title={p.title}
-                    description={p.description}
-                    image={p.image}
-                  />
-                </BlurFade>
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section> */}
-      {/* <section id="hackathons">
-        <div className="space-y-12 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 13}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Hackathons
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
-                  I like building things
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  During my time in university, I attended{" "}
-                  {DATA.hackathons.length}+ hackathons. People from around the
-                  country would come together and build incredible things in 2-3
-                  days. It was eye-opening to see the endless possibilities
-                  brought to life by a group of motivated and passionate
-                  individuals.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.hackathons.map((project, id) => (
-                <BlurFade
-                  key={project.title + project.dates}
-                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
-                >
-                  <HackathonCard
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    dates={project.dates}
-                    image={project.image}
-                    links={project.links}
-                  />
-                </BlurFade>
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section> */}
-      {/* <section id="services">
-        <div className="space-y-12 w-full">
-          <BlurFade delay={BLUR_FADE_DELAY * 13}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Services
-                </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
-                  What I Can Do For You
-                </h2>
-                <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed max-w-[600px] mx-auto">
-                  From concept to deployment, I offer end-to-end development services to bring your ideas to life with modern technologies and best practices.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.services.map((service, id) => (
-                <BlurFade
-                  key={service.title}
-                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
-                >
-                  <ServiceCard
-                    title={service.title}
-                    description={service.description}
-                    icon={service.icon}
-                  />
-                </BlurFade>
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section> */}
-      <section id="contact">
-        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full mb-20">
-          <BlurFade delay={BLUR_FADE_DELAY * 16}>
-            <div className="space-y-3">
-              <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                Contact
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-heading text-balance">
-                Get in Touch
-              </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              {/* Have a project in mind? Let&apos;s talk about it.  */}
-              Reach out via {" "}
-                <Link
-                  href={DATA.contact.social.LinkedIn.url}
-                  className="text-blue-500 hover:underline"
-                  target="_blank" rel="noopener noreferrer"
-                >
-                  LinkedIn
-                </Link>{" "}
-                or{" "}
-                <Link
-                  href={`mailto:${DATA.contact.email}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  Email
-                </Link>{" "}
-                and I&apos;ll get back to you shortly.
-              </p>
-            </div>
-          </BlurFade>
+
+      {/* Work timeline */}
+      <section className="container-px py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Experience"
+          title="My work experience"
+          description="Where I've worked and what I've been building along the way."
+        />
+        <div className="mt-12 max-w-3xl">
+          <Timeline items={workTimeline} />
         </div>
       </section>
-    </main>
+
+      {/* Testimonials */}
+      <section className="container-px py-16 md:py-24">
+        <SectionHeading
+          eyebrow="Kind words"
+          title="What people say"
+          description="Feedback from people I've worked with."
+          align="center"
+          className="mx-auto"
+        />
+        <div className="mt-12">
+          <Testimonials items={DATA.testimonials} />
+        </div>
+      </section>
+
+      {/* Latest posts */}
+      {posts.length > 0 && (
+        <section className="container-px py-16 md:py-24">
+          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+            <SectionHeading
+              eyebrow="From the blog"
+              title="Latest articles"
+              description="Notes on development, tools and things I've learned."
+            />
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full font-semibold"
+            >
+              <Link href="/blog">
+                Browse all
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard
+                key={post.slug}
+                slug={post.slug}
+                title={post.metadata.title}
+                summary={post.metadata.summary}
+                publishedAt={post.metadata.publishedAt}
+                category={post.metadata.category}
+                readingTime={post.metadata.readingTime}
+                image={post.metadata.image || undefined}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <CtaSection />
+    </>
   );
 }

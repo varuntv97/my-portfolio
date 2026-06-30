@@ -1,5 +1,19 @@
 import { Icons } from "@/components/icons";
-import { CodeXml, HomeIcon, NotebookPen, Globe, Smartphone, Wrench, Palette, Database, Brain } from "lucide-react";
+import {
+  CodeXml,
+  HomeIcon,
+  NotebookPen,
+  Globe,
+  Smartphone,
+  Wrench,
+  Palette,
+  Database,
+  Brain,
+  Eye,
+  Lightbulb,
+  TrendingUp,
+  HeartHandshake,
+} from "lucide-react";
 
 const numberOfYears = (): number => {
   const currentDate = new Date();
@@ -148,6 +162,8 @@ export const DATA = {
   projects: [
     {
       title: "RaviKumar M & Associates",
+      slug: "ravikumar-m-associates",
+      category: "Web Development",
       href: "https://ravikumarmassociates.com",
       dates: "June 2025",
       active: true,
@@ -171,6 +187,8 @@ export const DATA = {
     },
     {
       title: "Sanchara",
+      slug: "sanchara",
+      category: "AI / Full-Stack",
       href: "https://sanchara.vercel.app/",
       dates: "March 2025",
       active: true,
@@ -196,6 +214,8 @@ export const DATA = {
     },
     {
       title: "Ramtech",
+      slug: "ramtech",
+      category: "Web Development",
       href: "https://www.ramte.ch/",
       dates: "March 2025",
       active: true,
@@ -220,6 +240,8 @@ export const DATA = {
     },
     {
       title: "Sharana Krupa Valuers",
+      slug: "sharana-krupa-valuers",
+      category: "Web Development",
       href: "https://www.sharanakrupavaluers.com/",
       dates: "Feb 2025",
       active: true,
@@ -243,6 +265,8 @@ export const DATA = {
     },
     {
       title: "Calm Growth",
+      slug: "calm-growth",
+      category: "WordPress",
       href: "https://calmgrowth.ca",
       dates: "Nov 2024",
       active: true,
@@ -297,6 +321,8 @@ export const DATA = {
     // },
     {
       title: "Customer Sales Insights",
+      slug: "customer-sales-insights",
+      category: "Backend / API",
       href: "https://github.com/varuntv97/customer-sales-insights-api",
       dates: "Sep 2024",
       active: true,
@@ -322,6 +348,8 @@ export const DATA = {
     },
     {
       title: "Threejs Sphere",
+      slug: "threejs-sphere",
+      category: "Creative / 3D",
       href: "https://github.com/varuntv97/threejs-sphere/tree/master",
       dates: "April 2023",
       active: false,
@@ -807,4 +835,248 @@ export const DATA = {
       icon: Wrench,
     },
   ],
+
+  // ---- Page copy ----
+  hero: {
+    available: true,
+    greeting: "Hello, I'm Varun TV",
+    headline: "I'm Varun TV, a Software Developer from Mysuru, India",
+    subheadline:
+      "I design and build intuitive, scalable web applications with modern technologies — blending clean engineering with thoughtful user experience.",
+  },
+
+  stats: [
+    { value: `${numberOfYears()}+`, label: "Years of experience" },
+    { value: "20+", label: "Projects delivered" },
+    { value: "15+", label: "Happy clients" },
+  ],
+
+  about: {
+    intro:
+      "I'm a senior software developer based in Mysuru, India. Over the last few years I've shipped everything from marketing sites to AI-powered full-stack applications, working across the entire stack and caring just as much about the developer experience as the user experience.",
+    story: [
+      "My path into software started with a simple curiosity about how the websites I used every day were actually built. That curiosity turned into late nights pulling apart frameworks, breaking things, and slowly learning how to put them back together better than before.",
+      "Since then I've worked with startups and established firms alike — building customized ERP interfaces, real-estate and valuation platforms, and AI-driven products. I've grown from a frontend developer into a senior role where I lead technical initiatives, shape architecture, and mentor the people around me.",
+      "What keeps me going is the craft: writing code that's a pleasure to maintain, designing interfaces that feel obvious, and learning whatever new technology a problem demands.",
+    ],
+    journeyTitle: "Building software since my college days",
+    journey: [
+      "Specialise in full-stack development with React, Next.js, Vue, Node and Python.",
+      "Comfortable integrating AI/ML capabilities into real-world products.",
+      "Delivered 20+ projects for clients across real estate, engineering and travel.",
+      "Care deeply about performance, accessibility and responsive design.",
+    ],
+  },
+
+  coreValues: [
+    {
+      title: "Hard Work",
+      description:
+        "I show up consistently and put in the effort that great software demands — no shortcuts, no hand-waving.",
+      icon: HeartHandshake,
+    },
+    {
+      title: "Transparency",
+      description:
+        "Clear communication, honest timelines and no surprises. You always know where a project stands.",
+      icon: Eye,
+    },
+    {
+      title: "Innovation",
+      description:
+        "I stay curious and bring modern tools and ideas to every problem instead of defaulting to the familiar.",
+      icon: Lightbulb,
+    },
+    {
+      title: "Growth",
+      description:
+        "Every project is a chance to sharpen my craft and push the boundaries of what I can build.",
+      icon: TrendingUp,
+    },
+  ],
+
+  // NOTE: Placeholder testimonials — replace the quotes/names with real ones when available.
+  testimonials: [
+    {
+      quote:
+        "Varun delivered our website ahead of schedule and the attention to detail was exactly what we hoped for. Communication was clear throughout.",
+      name: "Sample Client",
+      title: "Founder, Real Estate Firm",
+      isPlaceholder: true,
+    },
+    {
+      quote:
+        "Working with Varun felt effortless. He translated a vague idea into a polished, responsive product and was patient with every revision.",
+      name: "Sample Client",
+      title: "Product Lead, Startup",
+      isPlaceholder: true,
+    },
+    {
+      quote:
+        "Reliable, technically sharp and genuinely invested in the outcome. I'd happily work with Varun again on future projects.",
+      name: "Sample Client",
+      title: "Director, Engineering Company",
+      isPlaceholder: true,
+    },
+  ],
+
+  faqs: [
+    {
+      question: "Are you available for freelance work?",
+      answer:
+        "Yes — I take on a limited number of freelance projects alongside my full-time role. Reach out through the contact page and I'll get back to you within 24–48 hours.",
+    },
+    {
+      question: "What kind of projects do you take on?",
+      answer:
+        "Full-stack web applications, marketing and business websites, REST/GraphQL APIs, and AI/ML integrations. If it lives on the web, there's a good chance I can help.",
+    },
+    {
+      question: "Which technologies do you work with?",
+      answer:
+        "Primarily React, Next.js, Vue, TypeScript, Node.js and Python. On the data and infra side I work with PostgreSQL, MongoDB, Supabase, Docker and the major cloud providers.",
+    },
+    {
+      question: "Do you work with clients outside India?",
+      answer:
+        "Absolutely. I've worked with clients across different time zones and I'm comfortable collaborating fully remotely.",
+    },
+    {
+      question: "How do we get started?",
+      answer:
+        "Send me a short note about your project and goals through the contact form. We'll hop on a call, scope the work, and I'll share a clear plan and timeline.",
+    },
+  ],
+
+  // Slugs surfaced as "featured work" on the home page (in order)
+  featuredProjects: ["sanchara", "ramtech", "ravikumar-m-associates", "calm-growth"],
+
+  blogCategories: ["All", "Development", "Guides", "Tools"],
+
+  // Rich case-study content keyed by project slug. Narrative copy is drafted
+  // and meant to be edited — swap in real metrics and details as you have them.
+  caseStudies: {
+    "sanchara": {
+      overview:
+        "Sanchara is an AI-powered travel companion that turns a few simple preferences into a complete, personalised itinerary in seconds. I built it end to end — from the database schema to the generative AI layer to the polished front end.",
+      challenge:
+        "Planning a trip means juggling dozens of tabs, opinions and unknowns. The goal was to compress all of that into a single, conversational flow that produces a usable day-by-day plan without overwhelming the traveller.",
+      approach: [
+        "Designed a clean onboarding flow that collects destination, dates, budget and interests with minimal friction.",
+        "Integrated Google's Gemini model to generate structured, day-by-day itineraries from user inputs.",
+        "Built the data and auth layer on Supabase + PostgreSQL so plans persist and can be revisited.",
+        "Crafted a responsive Next.js + Tailwind UI that feels fast and works beautifully on mobile.",
+      ],
+      outcome:
+        "A working product that takes a traveller from blank page to a structured, editable itinerary in under a minute — and a codebase clean enough to keep extending.",
+      role: "Full-stack developer & designer",
+      timeline: "2025",
+      type: "AI / Full-Stack Web App",
+      deliverables: ["Product design", "Frontend", "Backend & AI integration"],
+    },
+    "ramtech": {
+      overview:
+        "A custom marketing website for an engineering company, paired with an admin panel so the team can manage their own content without touching code.",
+      challenge:
+        "The client needed a professional web presence that they could keep up to date themselves, without depending on a developer for every copy or image change.",
+      approach: [
+        "Built a fast, SEO-friendly site with Next.js and Tailwind CSS.",
+        "Designed a simple admin panel backed by Supabase + PostgreSQL for content management.",
+        "Focused on a clean, trustworthy visual language suited to an engineering brand.",
+        "Ensured the experience is fully responsive across devices.",
+      ],
+      outcome:
+        "The client now owns a polished, self-serviceable website that represents their brand and scales with their content needs.",
+      role: "Full-stack developer",
+      timeline: "2025",
+      type: "Web Development",
+      deliverables: ["Website", "Admin panel", "CMS integration"],
+    },
+    "ravikumar-m-associates": {
+      overview:
+        "A bespoke website for a valuation and real-estate firm, focused on credibility, clarity and a smooth experience on every screen size.",
+      challenge:
+        "The firm needed an online presence that conveyed trust and made their services easy to understand for prospective clients.",
+      approach: [
+        "Translated the firm's services into a clear, well-structured information architecture.",
+        "Hand-built the front end with HTML, CSS and JavaScript for full control over the design.",
+        "Optimised for performance and mobile responsiveness.",
+      ],
+      outcome:
+        "A clean, professional website that gives the firm a credible digital storefront and makes it easy for clients to get in touch.",
+      role: "Frontend developer",
+      timeline: "2025",
+      type: "Web Development",
+      deliverables: ["Website design", "Frontend development"],
+    },
+    "sharana-krupa-valuers": {
+      overview:
+        "A custom website for a valuation firm, designed around clarity and a confident, responsive user experience.",
+      challenge:
+        "Present a specialised B2B service in a way that's approachable and easy to navigate for first-time visitors.",
+      approach: [
+        "Built a focused, content-first layout that highlights the firm's expertise.",
+        "Developed with HTML, CSS and JavaScript for a lightweight, fast site.",
+        "Tuned the layout to read well from mobile to desktop.",
+      ],
+      outcome:
+        "A polished website that elevates the firm's brand and clearly communicates what they offer.",
+      role: "Frontend developer",
+      timeline: "2025",
+      type: "Web Development",
+      deliverables: ["Website design", "Frontend development"],
+    },
+    "calm-growth": {
+      overview:
+        "A tailored WordPress website built to the client's specific requirements, balancing easy content editing with a custom look and feel.",
+      challenge:
+        "Deliver a distinctive, on-brand site while keeping it fully editable by a non-technical team through WordPress.",
+      approach: [
+        "Designed and built the site in WordPress with Elementor for flexible content editing.",
+        "Extended the design with custom CSS, HTML and PHP where the page builder fell short.",
+        "Ensured a responsive, consistent experience across devices.",
+      ],
+      outcome:
+        "A custom WordPress site that meets the client's exact needs and stays easy for them to maintain.",
+      role: "Web developer",
+      timeline: "2024",
+      type: "WordPress Development",
+      deliverables: ["Website", "Theme customisation"],
+    },
+    "customer-sales-insights": {
+      overview:
+        "A Flask-based API that ingests customer and sales data and turns it into useful insights through aggregation and reporting endpoints.",
+      challenge:
+        "Provide a clean, well-documented backend that makes raw customer and sales data queryable and meaningful.",
+      approach: [
+        "Designed RESTful endpoints with Flask and Python for customer and sales data.",
+        "Used MongoDB for flexible storage of semi-structured records.",
+        "Containerised the service with Docker and prepared Kubernetes manifests for deployment.",
+        "Built aggregation logic to surface reporting-style insights.",
+      ],
+      outcome:
+        "A portable, deployable API that demonstrates a clean separation of concerns and production-minded packaging.",
+      role: "Backend developer",
+      timeline: "2024",
+      type: "Backend / API",
+      deliverables: ["REST API", "Containerisation", "Aggregation & reporting"],
+    },
+    "threejs-sphere": {
+      overview:
+        "An immersive, animated 3D sphere experience built to explore creative coding with Three.js and GSAP.",
+      challenge:
+        "Push beyond standard UI work and experiment with real-time 3D graphics and motion on the web.",
+      approach: [
+        "Built an interactive 3D sphere scene with Three.js.",
+        "Choreographed smooth, performant animations with GSAP.",
+        "Bundled with Vite for a fast dev and build experience.",
+      ],
+      outcome:
+        "A polished creative-coding piece that stretched my skills in 3D rendering and web animation.",
+      role: "Creative developer",
+      timeline: "2023",
+      type: "Creative / 3D",
+      deliverables: ["3D scene", "Animation"],
+    },
+  },
 } as const;

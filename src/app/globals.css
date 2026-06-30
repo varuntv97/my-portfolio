@@ -4,68 +4,77 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 210 11.1% 3.53%;
+    /* Paperfolio palette — Light (paper / cream) */
+    --background: 45 29% 97%; /* #FAF9F6 cream */
+    --foreground: 0 0% 4.3%; /* #0B0B0B */
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 11.1% 3.53%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 0 0% 4.3%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11.1% 3.53%;
+    --popover-foreground: 0 0% 4.3%;
 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    /* Yellow accent is the brand "primary" */
+    --primary: 43 100% 60%; /* #FFC431 */
+    --primary-foreground: 0 0% 4.3%;
 
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 40 10% 94%; /* #F1F0EE */
+    --secondary-foreground: 0 0% 4.3%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 40 10% 94%;
+    --muted-foreground: 240 1% 37%; /* #5E5E5F */
 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 30 10% 92%; /* #ECEAE8 hover surface */
+    --accent-foreground: 0 0% 4.3%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 353 100% 65%; /* #FF4A60 */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --border: 30 10% 92%; /* #ECEAE8 */
+    --input: 30 10% 88%;
+    --ring: 43 100% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Secondary accent palette (service cards, badges, illustrations) */
+    --brand-yellow: 43 100% 60%; /* #FFC431 */
+    --brand-blue: 209 100% 55%; /* #1C92FF */
+    --brand-purple: 248 96% 62%; /* #5C42FB */
+    --brand-red: 353 100% 65%; /* #FF4A60 */
+    --brand-orange: 32 100% 59%; /* #FF9E2C */
 
     --font-heading: var(--font-heading);
     --font-mono: var(--font-mono);
   }
 
   .dark {
-    --background: 210 11.1% 3.53%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 4.3%; /* #0B0B0B */
+    --foreground: 45 29% 97%; /* #FAF9F6 */
 
-    --card: 210 11.1% 3.53%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 8.2%; /* #151515 */
+    --card-foreground: 45 29% 97%;
 
-    --popover: 210 11.1% 3.53%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 8.2%;
+    --popover-foreground: 45 29% 97%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 43 100% 60%;
+    --primary-foreground: 0 0% 4.3%;
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 12.5%; /* #202020 */
+    --secondary-foreground: 45 29% 97%;
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 0 0% 12.5%;
+    --muted-foreground: 0 0% 60%; /* #999 */
 
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 0% 16%;
+    --accent-foreground: 45 29% 97%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 353 100% 65%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --border: 0 0% 16%; /* #292929 */
+    --input: 0 0% 18%;
+    --ring: 43 100% 60%;
   }
 }
 
@@ -81,13 +90,47 @@
   }
   p {
     @apply text-pretty;
-    word-spacing: 0.05em;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-balance;
+    @apply text-balance font-heading font-bold tracking-tight;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
   }
 }
 
+@layer utilities {
+  /* Reusable section container */
+  .container-px {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  /* Subtle dotted paper texture used behind hero/sections */
+  .paper-dots {
+    background-image: radial-gradient(
+      hsl(var(--foreground) / 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+}
+
+/* ---- Marquee animation (logo strip / skills) ---- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap, 2rem)));
+  }
+}
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+}
+.marquee-paused:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---- MDX / prose code blocks (kept from prior setup) ---- */
 h3 code {
   @apply !text-lg md:!text-xl;
 }
@@ -130,22 +173,6 @@ code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
   @apply inline-block w-4 mr-4 text-right text-gray-500;
-}
-
-code {
-  counter-reset: line;
-}
-
-code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-
-  /* Other styling */
-  display: inline-block;
-  width: 1rem;
-  margin-right: 2rem;
-  text-align: right;
-  color: gray;
 }
 
 code[data-line-numbers-max-digits="2"] > [data-line]::before {
