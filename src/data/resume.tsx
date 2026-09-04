@@ -149,6 +149,28 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Wandering Wings",
+      href: "https://wanderingwings-web.vercel.app",
+      dates: "June 2026",
+      active: true,
+      description:
+        "Developed a custom website for a client, focusing on user experience and responsive design.",
+      technologies: [
+       "Next.js",
+       "Tailwind CSS",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://wanderingwings-web.vercel.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/wanderingwings.png",
+      video:
+        "",
+    },
+    {
       title: "RaviKumar M & Associates",
       href: "https://ravikumarmassociates.com",
       dates: "June 2025",
